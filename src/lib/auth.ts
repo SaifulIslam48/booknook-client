@@ -1,14 +1,14 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 import { jwt } from "better-auth/plugins";
-import { db } from "./db";
+import { db, mongoClient } from "./db";
 
 const googleConfigured = Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET);
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
   secret: process.env.BETTER_AUTH_SECRET,
-  database: mongodbAdapter(db),
+  database: mongodbAdapter(db, { client: mongoClient }),
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
