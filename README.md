@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BookNook
 
-## Getting Started
+**Live site:** add your deployed client URL here
+**Server repository:** ['booknook-server'](https://github.com/SaifulIslam48/booknook-server)
+**Live API:** https://booknook-server-lznd.onrender.com
 
-First, run the development server:
+BookNook is a small online library. **Add a book, borrow a book, return a book.**
+
+## Features
+
+- Home page with a Swiper slider, the 6 newest books loaded from MongoDB, and sections on how borrowing works and top categories
+- Browse every book in an equal-size card grid, with search by title or author and a category filter
+- Register and log in with email and password (with password rules) or with Google, using BetterAuth and the MongoDB adapter
+- Private pages (Add Book, Book Details, My Books, My Borrows) that survive a page reload and send guests to Login, then back to the page they wanted
+- Add books with a cover image uploaded to imgbb, then edit them or delete them from a confirmation modal
+- Borrow a book for 7 days, track it in My Borrows, and return it. Copy counts update automatically, a book with no copies shows "Not Available", and the same book cannot be borrowed twice at once
+- Light and dark theme, custom toast messages and modals (no browser alerts), loading spinners, a custom 404 page, and a page title on every route
+- Responsive layout for mobile, tablet and desktop
+
+## Tech stack
+
+Next.js (App Router), TypeScript, Tailwind CSS, daisyUI, Swiper, BetterAuth (MongoDB adapter and JWT plugin), and an Express + MongoDB server.
+
+## Run it locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in the values
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_API_URL` | URL of the BookNook server |
+| `BETTER_AUTH_SECRET` | Long random string used by BetterAuth |
+| `BETTER_AUTH_URL` | URL of this site (`http://localhost:3000` locally) |
+| `MONGODB_URI`, `DB_NAME` | MongoDB Atlas connection for BetterAuth |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Google login |
+| `NEXT_PUBLIC_IMGBB_KEY` | imgbb API key for book cover uploads |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Never commit `.env.local`.
